@@ -17,7 +17,7 @@ udhcpc -i wlan0 -p /var/run/udhcpc.pid -b -x hostname:`hostname`
 insmod /system/sdcard/driver/audio.ko
 
 ## Start GPIO:
-setgpio () {
+enablegpio () {
 GPIOPIN=$1
 echo $GPIOPIN > /sys/class/gpio/export
 echo out > /sys/class/gpio/gpio$GPIOPIN/direction
@@ -25,17 +25,17 @@ echo 0 > /sys/class/gpio/gpio$GPIOPIN/active_low
 echo 1 > /sys/class/gpio/gpio$GPIOPIN/value
 }
 # IR-LED
-setgpio 49
+enablegpio 49
 echo 1 > /sys/class/gpio/gpio49/active_low
 echo 1 > /sys/class/gpio/gpio49/value
 # Yellow-LED
-setgpio 38
+enablegpio 38
 echo 0 > /sys/class/gpio/gpio38/value
 # Blue-LED
-setgpio 39
+enablegpio 39
 # IR-Cut:
-setgpio 25
-setgpio 26
+enablegpio 25
+enablegpio 26
 
 # Startup Motor:
 insmod /system/sdcard/driver/sample_motor.ko
